@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import practice.jpa.dao.MarkDao;
 import practice.jpa.entity.Mark;
+import practice.jpa.entity.Student;
 import practice.jpa.service.MarkService;
 
 @Service
@@ -35,6 +36,11 @@ public class MarkServiceImpl implements MarkService{
 
 	public boolean delete(Long key) {
 		return markDao.delete(key);
+	}
+
+	@Override
+	public List<Mark> getMarksByStudent(Student student) {
+		return markDao.getMarksByStudent(student);
 	}
 
 }

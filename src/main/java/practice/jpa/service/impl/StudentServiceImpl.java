@@ -37,4 +37,14 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.delete(key);
 	}
 
+	@Override
+	public List<Student> getBestStudents() {
+		return studentDao.getBestStudents();
+	}
+
+	@Override
+	public List<Student> maxSubjects() {
+		return studentDao.maxSubjects();
+	}
+
 }

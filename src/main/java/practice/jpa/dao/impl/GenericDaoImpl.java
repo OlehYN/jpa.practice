@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import practice.jpa.dao.GenericDao;
 
 public abstract class GenericDaoImpl<Entity, Key> implements GenericDao<Entity, Key>{
 
-	@PersistenceContext
-	private EntityManager em;
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
+	protected EntityManager em;
 	
 	protected abstract Class<Entity> entityClass();
 	protected abstract String getEntityName();

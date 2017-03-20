@@ -1,4 +1,4 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/tx
@@ -6,14 +6,25 @@
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://www.springframework.org/schema/context
-	http://www.springframework.org/schema/context/spring-context-2.5.xsd">
-	
+	http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springmodules.org/schema/ehcache
+	http://www.springmodules.org/schema/cache/springmodules-ehcache.xsd
+	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring 
+	http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+	">
 	<context:component-scan base-package="practice.jpa" />
-	<tx:annotation-driven/>
+	<tx:annotation-driven />
+
+	<ehcache:annotation-driven cache-manager="cacheManager" />
+	<bean id="cacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="ehcache.xml" />
+	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/naukma" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/naukma?characterEncoding=UTF-8" />
 		<property name="username" value="root" />
 		<property name="password" value="" />
 		<property name="initialSize" value="5" />
@@ -39,7 +50,7 @@
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-		
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="emf" />
 		<property name="dataSource" ref="dataSource" />

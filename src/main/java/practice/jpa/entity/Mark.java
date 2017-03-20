@@ -102,7 +102,7 @@ public class Mark {
 
 	@Override
 	public String toString() {
-		return "Mark [markId=" + markId + ", markGradebook=" + markGradebook + ", markSubject=" + markSubject
+		return "Mark [markId=" + markId + ", markSubject=" + markSubject
 				+ ", mark=" + mark + "]";
 	}
 	

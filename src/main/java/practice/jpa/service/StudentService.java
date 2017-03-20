@@ -14,4 +14,8 @@ public interface StudentService {
 	void update(Student obj);
 
 	boolean delete(Long key);
+	
+	List<Student> getBestStudents();
+	
+	List<Student> maxSubjects();
 }
